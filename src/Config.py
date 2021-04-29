@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #! Python3.8
 #? @author: Renan Silva
 #? @github: https://github.com/rfelipesilva
