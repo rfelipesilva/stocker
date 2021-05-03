@@ -7,7 +7,7 @@ import streamlit as st
 import yfinance as yf
 import plotly.express as px
 
-from Config import Data
+from Support import Data
 
 @st.cache
 def load_data(stock_symbol_list, period_interval):
@@ -24,12 +24,14 @@ def load_data(stock_symbol_list, period_interval):
 
     df_to_concactenate = []
     for each_stock in stock_symbol_list:
-        stock_info = yf.Ticker(each_stock).history(period = period_interval)
+        period_value = Data().get_period_dict(period_interval)
+        stock_info = yf.Ticker(each_stock).history(period = period_value)
         stock_info['Stock'] = each_stock
         df_to_concactenate.append(stock_info)
         
     stocks_df = pd.concat(df_to_concactenate)
-    return stocks_df[['Close', 'Stock']]
+    stocks_df.rename(columns={'Close' : 'Price'}, inplace = True)
+    return stocks_df[['Price', 'Stock']]
 
 st.title('Stock Analyzer')
 
@@ -40,17 +42,11 @@ Stock Analyzer makes comparisons between stocks look easy, give it a try!
 stocks_list = Data().get_stocks_list()
 
 st.sidebar.header('Selection')
-selected_period = st.sidebar.selectbox('Period:', ['1mo', '3mo', '6mo', '1y'])
+selected_period = st.sidebar.selectbox('Period:', ['1 Month', '3 Months', '6 Months', '1 Year'])
 
 selected_stocks = st.sidebar.multiselect('Stocks', stocks_list)
 
-st.markdown("""
-
-""")
-
 if selected_stocks:
     to_plot = load_data(selected_stocks, selected_period)
-
-    fig = px.line(to_plot, x = to_plot.index, y = 'Close', color = 'Stock')
-
+    fig = px.line(to_plot, x = to_plot.index, y = 'Price', color = 'Stock')
     st.plotly_chart(fig)
