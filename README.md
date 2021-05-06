@@ -1,4 +1,4 @@
-# Stock Analyzer
+# Stocker
 **PROJECT STATUS**  : IN PROGRESS :warning:
 
 The Stock Analyzer is a web app designed to compare stocks. The documeation will be based on [STAR](https://careerkarma.com/blog/star-interview-method/) method with a slight adaptation:
