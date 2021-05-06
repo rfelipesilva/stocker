@@ -1,4 +1,4 @@
-#? @author: Renan Silva
+# @author: Renan Silva
 #? @github: https://github.com/rfelipesilva
 #! Python3.8
 
@@ -9,8 +9,8 @@ import plotly.express as px
 
 from Support import Data
 
-@st.cache
-def load_data(stock_symbol_list, period_interval):
+# @st.cache
+def load_data(stock_symbol_list, period_interval, language):
 
     """Provide stocks information to plot
 
@@ -24,29 +24,49 @@ def load_data(stock_symbol_list, period_interval):
 
     df_to_concactenate = []
     for each_stock in stock_symbol_list:
-        period_value = Data().get_period_dict(period_interval)
-        stock_info = yf.Ticker(each_stock).history(period = period_value)
+        stock_info = yf.Ticker(each_stock).history(period = period_interval)
         stock_info['Stock'] = each_stock
         df_to_concactenate.append(stock_info)
         
     stocks_df = pd.concat(df_to_concactenate)
-    stocks_df.rename(columns={'Close' : 'Price'}, inplace = True)
-    return stocks_df[['Price', 'Stock']]
 
-st.title('Stock Analyzer')
+    if language == 'pt':
+        stocks_df.rename(columns = {'Close' : 'Preço', 'Stock' : 'Ações'}, inplace = True)
+        return stocks_df[['Preço', 'Ações']]
+    else:
+        stocks_df.rename(columns = {'Close' : 'Price', 'Stock' : 'Stocks'}, inplace = True)
+        return stocks_df[['Price', 'Stocks']]
 
-st.markdown("""
-Stock Analyzer makes comparisons between stocks look easy, give it a try!
-""")
-
+language = Data().get_language_dict()
 stocks_list = Data().get_stocks_list()
 
-st.sidebar.header('Selection')
-selected_period = st.sidebar.selectbox('Period:', ['1 Month', '3 Months', '6 Months', '1 Year'])
+def update_page(language_dict):
 
-selected_stocks = st.sidebar.multiselect('Stocks', stocks_list)
+    """Update page according with specific language dicionary
 
-if selected_stocks:
-    to_plot = load_data(selected_stocks, selected_period)
-    fig = px.line(to_plot, x = to_plot.index, y = 'Price', color = 'Stock')
-    st.plotly_chart(fig)
+    Args: language_dict (dictionary): Radio button option comingo from "selected_language" variable
+
+    Returns: updated page according with user language selected
+    """
+
+    st.sidebar.header(language_dict['sidebar']['period']['header'])
+    selected_period = st.sidebar.selectbox(language_dict['sidebar']['period']['title'], list(language_dict['sidebar']['period']['values'].keys()))
+    selected_stocks = st.sidebar.multiselect(language_dict['sidebar']['stocks']['title'], stocks_list)
+
+    st.title('Stocker')
+
+    st.markdown("""{}""".format(language_dict['body']['description']))
+
+    if selected_stocks:
+        period = language_dict['sidebar']['period']['values'][selected_period]
+        data_to_plot = load_data(selected_stocks, period, language_dict['language'])
+        fig = px.line(data_to_plot, x = data_to_plot.index, y = data_to_plot.columns[0], color = data_to_plot.columns[1])
+        st.plotly_chart(fig)
+
+st.sidebar.header('Language')
+selected_language = st.sidebar.radio('', ['Portuguese', 'English'])
+
+if selected_language == 'Portuguese':
+    update_page(language['pt'])
+else:
+    update_page(language['en'])
