@@ -34,6 +34,10 @@ class Data:
                     },
                     'stocks' : {
                         'title' : 'Selecione as ações que deseja comparar:'
+                    },
+                    'about' : {
+                        'header' : 'Sobre',
+                        'text' : '**Stocker** é um aplicativo desenvolvido por *Renan Silva* que busca facilitar a comparação entre ações da bolsa de valores do Brasil (B3).'
                     }
                 },
                 'body' : {
@@ -56,6 +60,10 @@ class Data:
                     },
                     'stocks' : {
                         'title' : 'Select the stocks you want to compare:'
+                    },
+                    'about' : {
+                        'header' : 'About',
+                        'text' : '**Stocker** is an app developed by *Renan Silva* that aims to facilitate the stocks comparison of Brazil stock exchange (B3).'
                     }
                 },
                 'body' : {
