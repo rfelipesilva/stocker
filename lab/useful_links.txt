@@ -1,3 +1,6 @@
 streamlit themes:
 https://blog.streamlit.io/introducing-theming/#:~:text=App%20developers%20can%20create%20a,in%20the%20%E2%80%9CSettings%E2%80%9D%20menu.
 https://www.youtube.com/watch?v=Mz12mlwzbVU
+
+social media icons:
+https://github.com/paulrobertlloyd/socialmediaicons
