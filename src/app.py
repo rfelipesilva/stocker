@@ -2,12 +2,22 @@
 #? @github: https://github.com/rfelipesilva
 #! Python3.8
 
+import os
 import pandas as pd
 import streamlit as st
 import yfinance as yf
 import plotly.express as px
 
 from Support import Data
+
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+file_dir = '{}\\src\\style.css'.format(os.path.abspath(os.getcwd()))
+# print(file_dir)
+
+local_css(file_dir)
 
 # @st.cache
 def load_data(stock_symbol_list, period_interval, language):
@@ -53,6 +63,9 @@ def update_page(language_dict):
     selected_period = st.sidebar.selectbox(language_dict['sidebar']['period']['title'], list(language_dict['sidebar']['period']['values'].keys()))
     selected_stocks = st.sidebar.multiselect(language_dict['sidebar']['stocks']['title'], stocks_list)
 
+    st.sidebar.header(language_dict['sidebar']['about']['header'])
+    st.sidebar.info(language_dict['sidebar']['about']['text'])
+
     st.title('Stocker')
 
     st.markdown("""{}""".format(language_dict['body']['description']))
@@ -62,6 +75,7 @@ def update_page(language_dict):
         data_to_plot = load_data(selected_stocks, period, language_dict['language'])
         fig = px.line(data_to_plot, x = data_to_plot.index, y = data_to_plot.columns[0], color = data_to_plot.columns[1])
         st.plotly_chart(fig)
+    
 
 st.sidebar.header('Language')
 selected_language = st.sidebar.radio('', ['Portuguese', 'English'])
