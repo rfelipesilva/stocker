@@ -8,7 +8,7 @@ import streamlit as st
 import yfinance as yf
 import plotly.express as px
 
-from Support import Data
+from support import Data
 
 st.set_page_config(page_title='Stocker', page_icon=':chart_with_upwards_trend:')
 
