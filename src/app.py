@@ -10,10 +10,10 @@ import plotly.express as px
 
 from Support import Data
 
+st.set_page_config(page_title='Stocker', page_icon=':chart_with_upwards_trend:')
+
 language = Data.get_language_dict()
 stocks_list = Data.get_stocks_list()
-
-st.set_page_config(page_title='Stocker', page_icon=':chart_with_upwards_trend:')
 
 def local_css(file_name):
     with open(file_name) as f:
@@ -77,7 +77,6 @@ def update_page(language_dict):
     else:
         st.info(language_dict['body']['message_before_selection'])
     
-
 st.sidebar.header('Language/Idioma')
 selected_language = st.sidebar.radio('', ['Portuguese/Português', 'English/Inglês'])
 
