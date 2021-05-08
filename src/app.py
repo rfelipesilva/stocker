@@ -47,8 +47,8 @@ def load_data(stock_symbol_list, period_interval, language):
         stocks_df.rename(columns = {'Close' : 'Price', 'Stock' : 'Stocks'}, inplace = True)
         return stocks_df[['Price', 'Stocks']]
 
-language = Data().get_language_dict()
-stocks_list = Data().get_stocks_list()
+language = Data.get_language_dict()
+stocks_list = Data.get_stocks_list()
 
 def update_page(language_dict):
 
@@ -64,7 +64,7 @@ def update_page(language_dict):
     selected_stocks = st.sidebar.multiselect(language_dict['sidebar']['stocks']['title'], stocks_list)
 
     st.sidebar.header(language_dict['sidebar']['about']['header'])
-    st.sidebar.info(language_dict['sidebar']['about']['text'])
+    st.sidebar.info('{}'.format(language_dict['sidebar']['about']['text']))
 
     st.title('Stocker')
 
@@ -75,12 +75,14 @@ def update_page(language_dict):
         data_to_plot = load_data(selected_stocks, period, language_dict['language'])
         fig = px.line(data_to_plot, x = data_to_plot.index, y = data_to_plot.columns[0], color = data_to_plot.columns[1])
         st.plotly_chart(fig)
+    else:
+        st.info(language_dict['body']['message_before_selection'])
     
 
-st.sidebar.header('Language')
-selected_language = st.sidebar.radio('', ['Portuguese', 'English'])
+st.sidebar.header('Language/Idioma')
+selected_language = st.sidebar.radio('', ['Portuguese/Português', 'English/Inglês'])
 
-if selected_language == 'Portuguese':
+if selected_language == 'Portuguese/Português':
     update_page(language['pt'])
 else:
     update_page(language['en'])
