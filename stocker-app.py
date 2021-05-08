@@ -15,12 +15,12 @@ st.set_page_config(page_title='Stocker', page_icon=':chart_with_upwards_trend:')
 language = Data.get_language_dict()
 stocks_list = Data.get_stocks_list()
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+# def local_css(file_name):
+#     with open(file_name) as f:
+#         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # file_dir = '{}\\style.css'.format(os.path.abspath(os.getcwd()))
-local_css('style.css')
+# local_css('style.css')
 
 # @st.cache
 def load_data(stock_symbol_list, period_interval, language):
