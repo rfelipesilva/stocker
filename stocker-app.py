@@ -19,7 +19,7 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-file_dir = '{}\\src\\style.css'.format(os.path.abspath(os.getcwd()))
+file_dir = '{}\\style.css'.format(os.path.abspath(os.getcwd()))
 local_css(file_dir)
 
 # @st.cache
