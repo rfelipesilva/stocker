@@ -10,13 +10,16 @@ import plotly.express as px
 
 from Support import Data
 
+language = Data.get_language_dict()
+stocks_list = Data.get_stocks_list()
+
+st.set_page_config(page_title = 'Stocker', page_icon = ':chart_with_upwards_trend:')
+
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 file_dir = '{}\\src\\style.css'.format(os.path.abspath(os.getcwd()))
-# print(file_dir)
-
 local_css(file_dir)
 
 # @st.cache
@@ -46,9 +49,6 @@ def load_data(stock_symbol_list, period_interval, language):
     else:
         stocks_df.rename(columns = {'Close' : 'Price', 'Stock' : 'Stocks'}, inplace = True)
         return stocks_df[['Price', 'Stocks']]
-
-language = Data.get_language_dict()
-stocks_list = Data.get_stocks_list()
 
 def update_page(language_dict):
 
