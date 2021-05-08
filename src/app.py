@@ -13,7 +13,7 @@ from Support import Data
 language = Data.get_language_dict()
 stocks_list = Data.get_stocks_list()
 
-st.set_page_config(page_title = 'Stocker', page_icon = ':chart_with_upwards_trend:')
+st.set_page_config(page_title='Stocker', page_icon=':chart_with_upwards_trend:')
 
 def local_css(file_name):
     with open(file_name) as f:
@@ -24,7 +24,6 @@ local_css(file_dir)
 
 # @st.cache
 def load_data(stock_symbol_list, period_interval, language):
-
     """Provide stocks information to plot
 
     Args:
@@ -37,24 +36,24 @@ def load_data(stock_symbol_list, period_interval, language):
 
     df_to_concactenate = []
     for each_stock in stock_symbol_list:
-        stock_info = yf.Ticker(each_stock).history(period = period_interval)
+        stock_info = yf.Ticker(each_stock).history(period=period_interval)
         stock_info['Stock'] = each_stock
         df_to_concactenate.append(stock_info)
         
     stocks_df = pd.concat(df_to_concactenate)
 
     if language == 'pt':
-        stocks_df.rename(columns = {'Close' : 'Preço', 'Stock' : 'Ações'}, inplace = True)
+        stocks_df.rename(columns={'Close' : 'Preço', 'Stock' : 'Ações'}, inplace=True)
         return stocks_df[['Preço', 'Ações']]
     else:
-        stocks_df.rename(columns = {'Close' : 'Price', 'Stock' : 'Stocks'}, inplace = True)
+        stocks_df.rename(columns={'Close' : 'Price', 'Stock' : 'Stocks'}, inplace=True)
         return stocks_df[['Price', 'Stocks']]
 
 def update_page(language_dict):
-
     """Update page according with specific language dicionary
 
-    Args: language_dict (dictionary): Radio button option comingo from "selected_language" variable
+    Args: 
+        language_dict (dictionary): Radio button option comingo from "selected_language" variable
 
     Returns: updated page according with user language selected
     """
@@ -73,7 +72,7 @@ def update_page(language_dict):
     if selected_stocks:
         period = language_dict['sidebar']['period']['values'][selected_period]
         data_to_plot = load_data(selected_stocks, period, language_dict['language'])
-        fig = px.line(data_to_plot, x = data_to_plot.index, y = data_to_plot.columns[0], color = data_to_plot.columns[1])
+        fig = px.line(data_to_plot, x=data_to_plot.index, y=data_to_plot.columns[0], color=data_to_plot.columns[1])
         st.plotly_chart(fig)
     else:
         st.info(language_dict['body']['message_before_selection'])
