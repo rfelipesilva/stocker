@@ -14,7 +14,7 @@
 > - Filter option up to 1 year ago;
 > - No limits related to the stocks amount to compare;
 > - *About* section to facilitate access to contats (LinkedIn and GitHub);
-> - Funcionality to wait until users input;
+> - Functionality to wait until users input;
 > - Interactive chart;
 
 ## Libraries :flashlight:
