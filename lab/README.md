@@ -1,1 +1,0 @@
-This is to store tests/explorations and/or functions/methods.
