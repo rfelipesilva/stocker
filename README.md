@@ -1,7 +1,7 @@
 # Stocker
 **Project status**: DONE :white_check_mark:
 
-**Production environment**: [![Heroku](http://rstocker.herokuapp.com/)]
+**Production environment**: http://rstocker.herokuapp.com/
 
 **Showcase**
 ![alt text](img/stockergif.gif)
