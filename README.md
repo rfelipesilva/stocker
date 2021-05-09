@@ -17,7 +17,7 @@
 > - Functionality to wait until users input;
 > - Interactive chart;
 
-## Libraries :flashlight:
+## Libraries/Solultions :flashlight:
 > - [pandas](https://pandas.pydata.org/): to handle data manipulation;
 > - [streamlit](https://streamlit.io/): to develop web application;
 > - [yfinance](https://pypi.org/project/yfinance/): to get stock exchange information;
