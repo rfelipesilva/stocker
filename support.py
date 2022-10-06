@@ -19,13 +19,8 @@ class Data:
                 'sidebar' : {
                     'period' : {
                         'header' : 'Seleção',
-                        'title' : 'Selecione o período:',
-                        'values' : {
-                            '1 Mês' : '1mo',
-                            '3 Meses' : '3mo',
-                            '6 Meses' : '6mo',
-                            '1 Ano' : '1y'
-                        }
+                        'start' : 'Selecione data inicial do período:',
+                        'end' : 'Selecione data final do período:',
                     },
                     'stocks' : {
                         'title' : 'Selecione as ações que deseja comparar:'
@@ -53,13 +48,8 @@ class Data:
                 'sidebar' : {
                     'period' : {
                         'header' : 'Selection',
-                        'title' : 'Select period:',
-                        'values' : {
-                            '1 Month' : '1mo',
-                            '3 Months' : '3mo',
-                            '6 Months' : '6mo',
-                            '1 Year' : '1y'
-                        }
+                        'start' : 'Select the start date for the period:',
+                        'end' : 'Select the end date for the period:',
                     },
                     'stocks' : {
                         'title' : 'Select the stocks you want to compare:'
