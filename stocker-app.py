@@ -7,6 +7,7 @@ import pandas as pd
 import streamlit as st
 import yfinance as yf
 import plotly.express as px
+from pandas_datareader import data as pdr
 
 from support import Data
 
@@ -23,7 +24,7 @@ def local_css(file_name):
 local_css('style.css')
 
 # @st.cache
-def load_data(stock_symbol_list, period_interval, language):
+def load_data(stock_symbol_list, start_date, end_date, language):
     """Provide stocks information to plot
 
     Args:
@@ -32,11 +33,18 @@ def load_data(stock_symbol_list, period_interval, language):
 
     Returns:
         DataFrame: pandas dataframe with day as index, Close as price and Stocks as legend to use in the plotly
+        E.g:
+            |Date      | Close price| Stock   |
+            |2022-10-03| 32.180000  | PETR4.SA|
+            |2022-10-04| 31.370001  | PETR4.SA|
+            |2022-10-05| 32.549999  | PETR4.SA|
     """
 
     df_to_concactenate = []
     for each_stock in stock_symbol_list:
-        stock_info = yf.Ticker(each_stock).history(period=period_interval)
+
+        stock_info = pdr.DataReader(each_stock, data_source='yahoo', start=f'{start_date}', end=f'{end_date}')
+
         stock_info['Stock'] = each_stock
         df_to_concactenate.append(stock_info)
         
@@ -59,7 +67,13 @@ def update_page(language_dict):
     """
 
     st.sidebar.header(language_dict['sidebar']['period']['header'])
-    selected_period = st.sidebar.selectbox(language_dict['sidebar']['period']['title'], list(language_dict['sidebar']['period']['values'].keys()))
+    
+    start_date_raw = st.sidebar.date_input(language_dict['sidebar']['period']['start'])
+    start_date_formated = f'{start_date_raw.month}-{start_date_raw.day}-{start_date_raw.year}'
+
+    end_date_raw = st.sidebar.date_input(language_dict['sidebar']['period']['end'])
+    end_date_formated = f'{end_date_raw.month}-{end_date_raw.day}-{end_date_raw.year}'
+
     selected_stocks = st.sidebar.multiselect(language_dict['sidebar']['stocks']['title'], stocks_list)
 
     st.sidebar.header(language_dict['sidebar']['about']['header'])
@@ -70,8 +84,7 @@ def update_page(language_dict):
     st.markdown("""{}""".format(language_dict['body']['description']))
 
     if selected_stocks:
-        period = language_dict['sidebar']['period']['values'][selected_period]
-        data_to_plot = load_data(selected_stocks, period, language_dict['language'])
+        data_to_plot = load_data(selected_stocks, start_date_formated, end_date_formated, language_dict['language'])
         fig = px.line(data_to_plot, x=data_to_plot.index, y=data_to_plot.columns[0], color=data_to_plot.columns[1])
         st.plotly_chart(fig)
     else:
