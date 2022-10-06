@@ -1,5 +1,6 @@
 # Stocker
-**Project status**: DONE :white_check_mark:
+**Project status**: IN-PROGRESS (NOT AVAILABLE) ⚠️
+:white_check_mark:
 
 **Production environment**: http://rstocker.herokuapp.com/
 
