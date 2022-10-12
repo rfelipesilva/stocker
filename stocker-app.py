@@ -2,10 +2,8 @@
 #? @github: https://github.com/rfelipesilva
 #! Python3.8
 
-import os
 import pandas as pd
 import streamlit as st
-import yfinance as yf
 import plotly.express as px
 from pandas_datareader import data as pdr
 
@@ -20,7 +18,6 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# file_dir = '{}\\style.css'.format(os.path.abspath(os.getcwd()))
 local_css('style.css')
 
 # @st.cache

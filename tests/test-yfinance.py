@@ -1,5 +1,7 @@
-# import yfinance as yf
-import pandas as pd
+# @author: Renan Silva
+#? @github: https://github.com/rfelipesilva
+#! Python3.8
+
 from pandas_datareader import data as pdr
 
 stock_code = 'PETR4.SA'
