@@ -1,6 +1,5 @@
 # Stocker
-**Project status**: IN-PROGRESS (NOT AVAILABLE) ⚠️
-:white_check_mark:
+**Project status**: DONE :white_check_mark:
 
 **Production environment**: http://rstocker.herokuapp.com/
 
@@ -12,7 +11,7 @@
 
 ## Features :pencil2:
 > - Available for English and Portuguese;
-> - Filter option up to 1 year ago;
+> - Filter for long periods;
 > - No limits related to the stocks amount to compare;
 > - *About* section to facilitate access to contats (LinkedIn and GitHub);
 > - Functionality to wait until users input;
@@ -21,7 +20,7 @@
 ## What is being used? :hammer_and_wrench:
 > - [pandas](https://pandas.pydata.org/): to handle data manipulation;
 > - [streamlit](https://streamlit.io/): to develop web application;
-> - [yfinance](https://pypi.org/project/yfinance/): to get stock exchange information;
+> - [pandas_datareader](https://pandas-datareader.readthedocs.io/en/latest/): to get stock exchange information;
 > - [plotly](https://plotly.com/): to provide interactive charts;
 > - [Heroku](https://www.heroku.com/): to deploy in production;
 
