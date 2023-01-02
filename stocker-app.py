@@ -9,6 +9,9 @@ from pandas_datareader import data as pdr
 
 from support import Data
 
+import yfinance as yf
+yf.pdr_override()
+
 st.set_page_config(page_title='Stocker', page_icon=':chart_with_upwards_trend:')
 
 language = Data.get_language_dict()
@@ -40,7 +43,8 @@ def load_data(stock_symbol_list, start_date, end_date, language):
     df_to_concactenate = []
     for each_stock in stock_symbol_list:
 
-        stock_info = pdr.DataReader(each_stock, data_source='yahoo', start=f'{start_date}', end=f'{end_date}')
+        # stock_info = pdr.DataReader(each_stock, data_source='yahoo', start=f'{start_date}', end=f'{end_date}')
+        stock_info = pdr.get_data_yahoo(each_stock, start=f'{start_date}', end=f'{end_date}')
 
         stock_info['Stock'] = each_stock
         df_to_concactenate.append(stock_info)
@@ -66,10 +70,12 @@ def update_page(language_dict):
     st.sidebar.header(language_dict['sidebar']['period']['header'])
     
     start_date_raw = st.sidebar.date_input(language_dict['sidebar']['period']['start'])
-    start_date_formated = f'{start_date_raw.month}-{start_date_raw.day}-{start_date_raw.year}'
+    # start_date_formated = f'{start_date_raw.month}-{start_date_raw.day}-{start_date_raw.year}'
+    start_date_formated = f'{start_date_raw.year}-{start_date_raw.month}-{start_date_raw.day}'
 
     end_date_raw = st.sidebar.date_input(language_dict['sidebar']['period']['end'])
-    end_date_formated = f'{end_date_raw.month}-{end_date_raw.day}-{end_date_raw.year}'
+    # end_date_formated = f'{end_date_raw.month}-{end_date_raw.day}-{end_date_raw.year}'
+    end_date_formated = f'{end_date_raw.year}-{end_date_raw.month}-{end_date_raw.day}'
 
     selected_stocks = st.sidebar.multiselect(language_dict['sidebar']['stocks']['title'], stocks_list)
 
