@@ -1,13 +1,13 @@
 # Stocker
 **Project status**: DONE :white_check_mark:
 
-**Production environment**: http://rstocker.herokuapp.com/
+**Production environment**: https://stocker.onrender.com
 
 **Showcase**
 ![alt text](img/stockergif.gif)
 
 ## Description :pushpin:
-[Stocker](http://rstocker.herokuapp.com/) is an app that aims to facilitate the stocks comparison of Brazil stock exchange (B3).
+[Stocker](https://stocker.onrender.com) is an app that aims to facilitate the stocks comparison of Brazil stock exchange (B3).
 
 ## Features :pencil2:
 > - Available for English and Portuguese;
@@ -21,8 +21,9 @@
 > - [pandas](https://pandas.pydata.org/): to handle data manipulation;
 > - [streamlit](https://streamlit.io/): to develop web application;
 > - [pandas_datareader](https://pandas-datareader.readthedocs.io/en/latest/): to get stock exchange information;
+> - [yfinance](https://pypi.org/project/yfinance/): to supporpt getting stock exchange information;
 > - [plotly](https://plotly.com/): to provide interactive charts;
-> - [Heroku](https://www.heroku.com/): to deploy in production;
+> - [Render](https://render.com/): to deploy in production;
 
 ## Remarks :warning:
 > - Available ONLY for the Brazilian stock exchange;
