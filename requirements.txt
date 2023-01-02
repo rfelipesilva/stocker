@@ -2,3 +2,4 @@ pandas==1.2.4
 pandas_datareader==0.10.0
 plotly==5.11.0
 streamlit==1.16.0
+yfinance==0.2.3
