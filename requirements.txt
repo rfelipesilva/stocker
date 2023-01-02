@@ -1,4 +1,4 @@
-pandas==1.4.3
-pandas_datareader==0.10.0
-plotly==5.11.0
-streamlit==1.16.0
+pandas==1.2.4
+pandas-datareader==0.10.0
+plotly==4.14.3
+streamlit==0.80.0
